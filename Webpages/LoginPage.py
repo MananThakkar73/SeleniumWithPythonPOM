@@ -2,9 +2,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+from Utility.BaseClass import Baseclass
 
-class Loginpage:
+
+class Loginpage(Baseclass):
     def __init__(self,driver):
+        super().__init__(driver)
         self.driver = driver
 
     emai_id = (By.ID,"user-name")

@@ -1,16 +1,21 @@
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
+from Utility.BaseClass import Baseclass
 
-class onepage:
+
+class onepage(Baseclass):
 
     def __init__(self,driver):
+        super().__init__(driver)
         self.driver = driver
 
+    __test1_emailadd = (By.ID,"inputEmail")
+    __test1_password = (By.ID,"inputPassword")
 
-    test1_emailadd = (By.ID,"inputEmail")
-    test1_password = (By.ID,"inputPassword")
-    test1_loginbutton = (By.XPATH,"//button[text()='Sign in']")
+
+
+    __test1_loginbutton = (By.XPATH,"//button[text()='Sign in']")
 
     test2_values = (By.XPATH,"//li[@class='list-group-item justify-content-between']")
     test2_value_values = (By.XPATH,"//span[@class='badge badge-pill badge-primary']")
@@ -26,11 +31,25 @@ class onepage:
 
     test6_text = (By.XPATH,"//h1[text()='Test 6']")
 
+    # def get_element(self, elment):
+    #     return elment
+
+    def get_emailid(self):
+        return onepage.__test1_emailadd
+
+    def get_password(self):
+        return onepage.__test1_password
+
+    def get_loginButton(self):
+        return onepage.__test1_loginbutton
+    #
+    # def pass_Present(self):
+    #     Baseclass.element_present(self.test1_password)
 
     def test1_loginMethod(self,email,pasword):
-        self.driver.find_element(*onepage.test1_emailadd).send_keys(email)
-        self.driver.find_element(*onepage.test1_password).send_keys(pasword)
-        self.driver.find_element(*onepage.test1_password).send_keys(Keys.ENTER)
+        self.driver.find_element(*onepage.__test1_emailadd).send_keys(email)
+        self.driver.find_element(*onepage.__test1_password).send_keys(pasword)
+        self.driver.find_element(*onepage.__test1_password).send_keys(Keys.ENTER)
 
     def test2_valuesinsection(self,n):
         assert len(self.driver.find_elements(*onepage.test2_values)) == n

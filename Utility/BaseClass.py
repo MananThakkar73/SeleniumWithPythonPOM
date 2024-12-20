@@ -7,9 +7,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-@pytest.mark.usefixtures("startup")
+#@pytest.mark.usefixtures("startup")
 class Baseclass:
-    print("This is Baseclass")
+    def __init__(self, driver):
+        self.driver = driver
 
     def sleep(self,s):
         time.sleep(s)

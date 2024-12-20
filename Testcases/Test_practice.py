@@ -1,23 +1,25 @@
 import pytest
 
 from Testcases import conftest
+from Testcases.conftest import startup
 from Utility.BaseClass import Baseclass
 from selenium.webdriver.common.by import By
 from Webpages.LoginPage import Loginpage
 from Webpages.onepage import onepage
 
+@pytest.mark.usefixtures("startup")
+class TestPractice:
 
-class TestPractice(Baseclass):
-
-    @pytest.fixture(params=Baseclass.datafromexcel(conftest.home_dir+"/PycharmProjects/pythonProject/TestData/datapractice.xlsx", "Sheet1"))
+    @pytest.fixture(params=Baseclass.datafromexcel(conftest.home_dir+"\\PycharmProjects\\SeleniumWithPythonPOM\\TestData\\datapractice.xlsx", "Sheet1"))
     def getdata(self,request):
         return request.param
 
     @pytest.mark.Regression
-    def test_001(self,getdata):
-        Baseclass.element_present(self,onepage.test1_emailadd)
-        Baseclass.element_present(self,onepage.test1_password)
-        Baseclass.element_present(self,onepage.test1_loginbutton)
+    def test_001(self, getdata):
+        Baseclass.element_present(self, onepage.get_emailid(self=onepage))
+        #onepage.emailId_Present(self=onepage.)
+        Baseclass.element_present(self,onepage.get_password(self= onepage))
+        Baseclass.element_present(self,onepage.get_loginButton(self=onepage))
         onepage.test1_loginMethod(self,getdata[0],getdata[1])
 
     @pytest.mark.Regression
@@ -47,7 +49,7 @@ class TestPractice(Baseclass):
         Baseclass.element_wait(self,onepage.test5_button1,10)
         Baseclass.dotclick(self,onepage.test5_button1)
         Baseclass.element_present(self,onepage.test5_alert)
-        Baseclass.button_enable(self,onepage.test5_button1)
+        Baseclass.button_disable(self,onepage.test5_button1)
 
     def test_006(self):
         Baseclass.move_to_elment(self, onepage.test6_text)
